@@ -1,6 +1,8 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org/">
-<head th:replace="~{fragments :: head}"></head>
+<html xmlns:th="http://www.thymeleaf.org/" lang="en">
+<head th:replace="~{fragments :: head}">
+  <title>Tech Jobs</title>
+</head>
 
 <body>
 
@@ -14,18 +16,14 @@
 <table class="centeredTable">
   <tr>
     <th:block th:each="column : ${columns}">
-      <th th:text = "${column.value}"></th>
+      <th th:text="${column.value}"></th>
     </th:block>
   </tr>
   <tr>
-    <!-- TODO #2: Complete the View Jobs By Category Table. -->
-
-    <td></td> <!-- Feel free to remove or modify this element if necessary. -->
-
-    <td th:each="category : ${tableChoices}">
+    <td th:each="column : ${columns}">
       <ul>
-        <li th:each="item : ${category.value}">
-          <a th:href="@{/list/jobs(column=${category.key},value=${item})}" th:text="${item}"></a>
+        <li th:each="item : ${tableChoices[column.key]}">
+          <a th:href="@{/list/jobs(column=${column.key},value=${item})}" th:text="${item}"></a>
         </li>
       </ul>
     </td>
